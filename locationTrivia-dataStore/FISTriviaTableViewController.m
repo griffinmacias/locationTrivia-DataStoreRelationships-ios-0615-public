@@ -8,8 +8,9 @@
 
 #import "FISTriviaTableViewController.h"
 #import "FISTrivia.h"
-
+#import "FISAddTriviaViewController.h"
 @interface FISTriviaTableViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *triviaAddButtonTapped;
 
 @end
 
@@ -20,15 +21,22 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        
     }
     return self;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-
+    self.triviaAddButtonTapped.accessibilityLabel = @"Add Trivia Button";
     self.view.accessibilityIdentifier=@"Trivia Table";
     self.view.accessibilityLabel=@"Trivia Table";
     
@@ -109,15 +117,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    FISAddTriviaViewController *destination = segue.destinationViewController;
+    destination.locationTriviaItems = self.trivia;
 }
-*/
+
 
 @end
